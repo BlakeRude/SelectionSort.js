@@ -26,16 +26,26 @@
 	</script>
 
 	<!-- Location for any of our HTML -->
+
+
+	<BR>
+	<p>Enter values here separated by spaces.</p>
+	<input type="text" id="numbersInput">
+	<input style="visibility:visible;" type="button" id="ButtonSubmit" value="Submit" onclick="javascript:submit()">
+
+
 	<script>
+		// Get the input field
+		var input = document.getElementById("numbersInput");
 
+		input.addEventListener("keyup", function (event) {
+			// enter keycode
+			if (event.keyCode === 13) {
+				// Trigger the button element with a click
+				submit();
+			}
+		}); 
 	</script>
-
-	<form>
-		<BR>
-		<p>Enter values here separated by spaces.</p>
-		<p><input type="text" name="numbersInput" id="numbersInput"></p>
-		<input style="visibility:visible;" type="button" id="ButtonSubmit" value="Submit" onclick="submit()">
-	</form>
 
 </body>
 
