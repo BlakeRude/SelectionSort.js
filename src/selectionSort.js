@@ -1,6 +1,7 @@
 
 function submit() {
-	// begins the process
+
+	clearOutput();
 
 	// get the HTMLElement
 	var textBox = document.getElementById("numbersInput");
@@ -8,22 +9,51 @@ function submit() {
 	// get its value
 	var stringInput = textBox.value;
 
-	// clear its value
-	textBox.value = "";
+	if (stringInput != "") {
 
-	// now we need to parse the string by spaces into an integer array
-	var stringArray = stringInput.split(" ");
-	var integerArray = new Array(stringArray.length);
+		// clear its value
+		textBox.value = "";
 
-	for (var i = 0; i < stringArray.length; i++) {
-		if (!isNaN(stringArray[i])) {
-			integerArray[i] = parseInt(stringArray[i]);
+		// now we need to parse the string by spaces into an integer array
+		var stringArray = stringInput.split(" ");
+		var integerArray = new Array(stringArray.length);
+		var newSize = 0;
+
+		for (var i = 0; i < stringArray.length; i++) {
+			if (!isNaN(parseInt(stringArray[i]))) {
+				integerArray[i] = parseInt(stringArray[i]);
+			}
+			newSize = i;
+		}
+
+		var boolean = true;
+
+		for (var i = 0; i < integerArray.length; i++) {
+			if (integerArray[i] == undefined) {
+				alert("Format was incorrect.");
+				clearOutput();
+				boolean = false;
+				break;
+			}
+		}
+
+		if (boolean) {
+
+			integerArray.length = newSize;
+
+			if (integerArray.length > 0) {
+				selectionSort(integerArray);
+			}
 		}
 	}
+}
 
-	alert(integerArray.toString());
-
-	selectionSort(integerArray);
+function clearOutput() {
+	// needs to clear all the previous elements
+	var divElement = document.getElementById("results");
+	while (divElement.firstChild) {
+		divElement.removeChild(divElement.lastChild);
+	}
 }
 
 // the place is the step of the sorting
@@ -44,8 +74,6 @@ function outputSortedString(sortedString, place) {
 		formattedString += " ";
 	}
 
-	alert(formattedString);
-
 	// first get the div element we set up
 	var div = document.getElementById("results");
 
@@ -55,9 +83,7 @@ function outputSortedString(sortedString, place) {
 	parElement.innerHTML = formattedString;
 
 	// add the child element
-	document.body.appendChild(parElement);
-
-	alert("Bottom");
+	div.appendChild(parElement);
 }
 
 function selectionSort(integerArray) {
