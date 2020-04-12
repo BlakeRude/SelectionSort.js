@@ -1,3 +1,4 @@
+
 function submit() {
 	// begins the process
 
@@ -15,10 +16,51 @@ function submit() {
 	var integerArray = new Array(stringArray.length);
 
 	for (var i = 0; i < stringArray.length; i++) {
-		integerArray[i] = parseInt(stringArray[i]);
+		if (!isNaN(stringArray[i])) {
+			integerArray[i] = parseInt(stringArray[i]);
+		}
 	}
 
-	// TODO: plug in selection sort with input as the integerArray here
+	alert(integerArray.toString());
+
+	selectionSort(integerArray);
+}
+
+// the place is the step of the sorting
+// the sorted string is the currently sorted, or being sorted,
+// 	integer array
+function outputSortedString(sortedString, place) {
+
+	// format the string
+	var formattedString = "";
+
+	alert(sortedString.length);
+
+	for (var i = 0; i < sortedString.length; i++) {
+		if (i === place) {
+			formattedString += " |";
+		}
+		formattedString += sortedString[i];
+		formattedString += " ";
+	}
+
+	alert(formattedString);
+
+	// first get the div element we set up
+	var div = document.getElementById("results");
+
+	// then we need to add a new element
+	var parElement = document.createElement("p");
+
+	parElement.innerHTML = formattedString;
+
+	// add the child element
+	document.body.appendChild(parElement);
+
+	alert("Bottom");
+}
+
+function selectionSort(integerArray) {
 
 	// Selection Sort Algorithm
 	var i = 0;
@@ -31,13 +73,10 @@ function submit() {
 	// Can delete if you want
 	outputSortedString(integerArray, stepnum);
 
-	for(i = 0; i < (integerArray.length-1); i++)
-	{
+	for (i = 0; i < (integerArray.length - 1); i++) {
 		min = i;
-		for(j = i+1; j < integerArray.length; j++)
-		{
-			if(integerArray[j] < integerArray[min])
-			{
+		for (j = i + 1; j < integerArray.length; j++) {
+			if (integerArray[j] < integerArray[min]) {
 				min = j;
 			}
 		}
@@ -50,15 +89,4 @@ function submit() {
 		stepnum++;
 		outputSortedString(integerArray, stepnum);
 	}
-
-}
-
-// the place is the step of the sorting
-// the sorted string is the currently sorted, or being sorted,
-// 	integer array
-function outputSortedString(sortedString, place) {
-
-
-	// format this into an html element
-
 }
