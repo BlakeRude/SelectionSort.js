@@ -20,6 +20,37 @@ function submit() {
 
 	// TODO: plug in selection sort with input as the integerArray here
 
+	// Selection Sort Algorithm
+	var i = 0;
+	var j = 0;
+	var min = 0;
+	var temp = 0;
+	var stepnum = 0;
+
+	// Print before any sorting, step 0.
+	// Can delete if you want
+	outputSortedString(integerArray, stepnum);
+
+	for(i = 0; i < (integerArray.length-1); i++)
+	{
+		min = i;
+		for(j = i+1; j < integerArray.length; j++)
+		{
+			if(integerArray[j] < integerArray[min])
+			{
+				min = j;
+			}
+		}
+		// Swap
+		temp = integerArray[i];
+		integerArray[i] = integerArray[min];
+		integerArray[min] = temp;
+
+		// Iterate step, then print
+		stepnum++;
+		outputSortedString(integerArray, stepnum);
+	}
+
 }
 
 // the place is the step of the sorting
