@@ -28,21 +28,18 @@ function submit() {
 
 		var boolean = true;
 
+		// create another integer array with the correct values only
+		var correctIntegerArray = new Array();
 		for (var i = 0; i < integerArray.length; i++) {
-			if (integerArray[i] == undefined) {
-				alert("Format was incorrect.");
-				clearOutput();
-				boolean = false;
-				break;
+			if (integerArray[i] != undefined) {
+				correctIntegerArray.push(integerArray[i])
 			}
 		}
 
 		if (boolean) {
 
-			integerArray.length = newSize;
-
-			if (integerArray.length > 0) {
-				selectionSort(integerArray);
+			if (correctIntegerArray.length > 0) {
+				selectionSort(correctIntegerArray);
 			}
 		}
 	}
@@ -64,11 +61,9 @@ function outputSortedString(sortedString, place) {
 	// format the string
 	var formattedString = "";
 
-	alert(sortedString.length);
-
 	for (var i = 0; i < sortedString.length; i++) {
 		if (i === place) {
-			formattedString += " |";
+			formattedString += " | ";
 		}
 		formattedString += sortedString[i];
 		formattedString += " ";
