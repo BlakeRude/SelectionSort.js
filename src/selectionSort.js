@@ -109,7 +109,7 @@ function outputSortedString(sortedString, place, minElement, elementSwapped) {
 	else if (elementSwapped == "" || minElement == "") {
 
 		parElement = document.createElement("p")
-		parElement.innerHTML = "----- Beginning to sort the list. Grab the smallest element.";
+		parElement.innerHTML = "Beginning the sort the list. Grab the smallest element from the entire array.";
 		div.appendChild(parElement);
 
 		return;
@@ -117,11 +117,11 @@ function outputSortedString(sortedString, place, minElement, elementSwapped) {
 	else {
 
 		parElement = document.createElement("p")
-		parElement.innerHTML = "----- minimum element of right list is " + elementSwapped;
+		parElement.innerHTML = "----- minimum element of right list was " + elementSwapped;
 		div.appendChild(parElement);
 
 		parElement = document.createElement("p")
-		parElement.innerHTML = "----- swap this element with " + minElement;
+		parElement.innerHTML = "----- swapped this element with " + minElement;
 		div.appendChild(parElement);
 	}
 }
