@@ -61,47 +61,67 @@ function outputSortedString(sortedString, place, minElement, elementSwapped) {
 
 	// format the string
 	var formattedString = "";
+	var otherString = "";
+	var placeReached = false;
 
 	for (var i = 0; i < sortedString.length; i++) {
 		if (i === place) {
 			formattedString += " | ";
+			placeReached = true;
 		}
-		formattedString += sortedString[i];
-		formattedString += " ";
+		if (!placeReached) {
+			formattedString += sortedString[i];
+			formattedString += " ";
+		}
+		else {
+			otherString += sortedString[i];
+			otherString += " ";
+		}
 	}
 
-	// first get the div element we set up
 	var div = document.getElementById("results");
+	var parElement;
+	var newDiv = document.getElementById("CopyableDiv").cloneNode();
+	newDiv.id = "none";
 
-	// then we need to add a new element
-	var parElement = document.createElement("p");
+	var sortedPar = document.getElementById("SortedSection").cloneNode();
+	sortedPar.innerHTML = formattedString;
+	sortedPar.id = "SortedSection";
+	sortedPar.style.cssFloat = "left";
+	sortedPar.style.backgroundColor = "green";
 
-	parElement.innerHTML = formattedString;
+	var unsortedPar = document.getElementById("UnsortedSection").cloneNode();
+	unsortedPar.innerHTML = otherString;
+	unsortedPar.id = "UnsortedSection";
+	unsortedPar.style.cssFloat = "center";
+	unsortedPar.style.backgroundColor = "red";
 
-	div.appendChild(parElement);
+	newDiv.appendChild(sortedPar);
+	newDiv.appendChild(unsortedPar);
+	div.appendChild(newDiv);
 
 	if (elementSwapped == "sorted") {
 
 		parElement = document.createElement("p")
-
 		parElement.innerHTML = "----- The list is now sorted!";
-
 		div.appendChild(parElement);
 	}
 	else if (elementSwapped == "" || minElement == "") {
+
+		parElement = document.createElement("p")
+		parElement.innerHTML = "----- Beginning to sort the list. Grab the smallest element.";
+		div.appendChild(parElement);
+
 		return;
 	}
 	else {
+
 		parElement = document.createElement("p")
-
 		parElement.innerHTML = "----- minimum element of right list is " + elementSwapped;
-
 		div.appendChild(parElement);
 
 		parElement = document.createElement("p")
-
 		parElement.innerHTML = "----- swap this element with " + minElement;
-
 		div.appendChild(parElement);
 	}
 }
