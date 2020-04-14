@@ -138,3 +138,7 @@ function selectionSort(integerArray) {
 
 	outputSortedString(integerArray, stepnum + 1, "sorted", "sorted")
 }
+
+function welcome() {
+	sayIt("Selection Sort is a comparison sorting algorithm which repeatedly finds the minimum element in the unsorted part of the array and moving it to the sorted part. ");
+}
