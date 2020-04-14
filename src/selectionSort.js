@@ -55,8 +55,9 @@ function clearOutput() {
 
 // the place is the step of the sorting
 // the sorted string is the currently sorted, or being sorted,
+// element swapped is a string value
 // 	integer array
-function outputSortedString(sortedString, place) {
+function outputSortedString(sortedString, place, minElement, elementSwapped) {
 
 	// format the string
 	var formattedString = "";
@@ -77,8 +78,32 @@ function outputSortedString(sortedString, place) {
 
 	parElement.innerHTML = formattedString;
 
-	// add the child element
 	div.appendChild(parElement);
+
+	if (elementSwapped == "sorted") {
+
+		parElement = document.createElement("p")
+
+		parElement.innerHTML = "----- The list is now sorted!";
+
+		div.appendChild(parElement);
+	}
+	else if (elementSwapped == "" || minElement == "") {
+		return;
+	}
+	else {
+		parElement = document.createElement("p")
+
+		parElement.innerHTML = "----- minimum element of right list is " + elementSwapped;
+
+		div.appendChild(parElement);
+
+		parElement = document.createElement("p")
+
+		parElement.innerHTML = "----- swap this element with " + minElement;
+
+		div.appendChild(parElement);
+	}
 }
 
 function selectionSort(integerArray) {
@@ -92,7 +117,7 @@ function selectionSort(integerArray) {
 
 	// Print before any sorting, step 0.
 	// Can delete if you want
-	outputSortedString(integerArray, stepnum);
+	outputSortedString(integerArray, stepnum, "", "");
 
 	for (i = 0; i < (integerArray.length - 1); i++) {
 		min = i;
@@ -108,6 +133,8 @@ function selectionSort(integerArray) {
 
 		// Iterate step, then print
 		stepnum++;
-		outputSortedString(integerArray, stepnum);
+		outputSortedString(integerArray, stepnum, integerArray[min], integerArray[i]);
 	}
+
+	outputSortedString(integerArray, stepnum + 1, "sorted", "sorted")
 }
